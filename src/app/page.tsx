@@ -1,9 +1,11 @@
 'use client'
-import { Box, Button, Stack, TextField } from '@mui/material'
+import { Box, Button, Stack, TextField, useMediaQuery } from '@mui/material'
 import Alert from '@mui/material/Alert';
 import { useState } from 'react'
 import Slider from '@mui/material/Slider';
 import Typography from '@mui/material/Typography';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline'
 
 
 export default function Home() {
@@ -127,7 +129,42 @@ export default function Home() {
     setDialogMessage('')
   }
 
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+
+  const lightTheme = createTheme({
+    palette: {
+      primary: {
+        main: '#ffffff',
+      },
+      secondary: {
+        main: '#edf2ff',
+      },
+      background: {
+        default: '#ffffff'
+      }
+    },
+  });
+
+  const darkTheme = createTheme({
+    palette: {
+      primary: {
+        main: '#0052cc',
+      },
+      secondary: {
+        main: '#edf2ff',
+      },
+      background: {
+        default: '#000000'
+      }
+    },
+  });
+
+  const theme = (prefersDarkMode ? darkTheme : lightTheme)
+  
+
   return (
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
     <Box
       width="100vw"
       height="100vh"
@@ -135,6 +172,7 @@ export default function Home() {
       flexDirection="column"
       justifyContent="center"
       alignItems="center"
+      color="theme.palette.background.default"
     >
       <Stack direction={'row'} spacing={2} mb={2}>
         <Stack
@@ -215,10 +253,10 @@ export default function Home() {
                 <Box
                   bgcolor={
                     message.role === 'assistant'
-                      ? 'primary.main'
-                      : 'secondary.main'
+                      ? '#1976D2'
+                      : '#9C27B0'
                   }
-                  color="white"
+                  color="#FFFFFF"
                   borderRadius={16}
                   p={3}
                 >
@@ -244,5 +282,6 @@ export default function Home() {
       {dialogOpen && <Alert severity={errorType}>{dialogMessage}</Alert>}
 
     </Box>
+    </ThemeProvider>
   )
 }
