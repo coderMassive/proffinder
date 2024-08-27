@@ -129,8 +129,6 @@ export default function Home() {
     setDialogMessage('')
   }
 
-  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-
   const lightTheme = createTheme({
     palette: {
       primary: {
@@ -144,27 +142,8 @@ export default function Home() {
       }
     },
   });
-
-  const darkTheme = createTheme({
-    palette: {
-      primary: {
-        main: '#ffffff',
-      },
-      secondary: {
-        main: '#edf2ff',
-      },
-      background: {
-        default: '#ffffff'
-      }
-    },
-  });
-
-  const theme = (prefersDarkMode ? darkTheme : lightTheme)
   
-
   return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
     <Box
       width="100vw"
       height="100vh"
@@ -172,7 +151,7 @@ export default function Home() {
       flexDirection="column"
       justifyContent="center"
       alignItems="center"
-      color="theme.palette.background.default"
+      color="#ffffff"
     >
       <Stack direction={'row'} spacing={2} mb={2}>
         <Stack
@@ -282,6 +261,5 @@ export default function Home() {
       {dialogOpen && <Alert severity={errorType}>{dialogMessage}</Alert>}
 
     </Box>
-    </ThemeProvider>
   )
 }
