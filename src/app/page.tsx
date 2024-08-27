@@ -4,8 +4,7 @@ import Alert from '@mui/material/Alert';
 import { useState } from 'react'
 import Slider from '@mui/material/Slider';
 import Typography from '@mui/material/Typography';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline'
+import { createTheme } from '@mui/material/styles';
 
 
 export default function Home() {
@@ -17,7 +16,11 @@ export default function Home() {
   ])
   const [message, setMessage] = useState('')
   const [professorID, setProfessorID] = useState('')
-  const delay = ms => new Promise(res => setTimeout(res, ms));
+
+  async function sleep(ms: number): Promise<void> {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
 
   const [fieldOfStudy, setFieldOfStudy] = useState('')
   
@@ -82,7 +85,7 @@ export default function Home() {
       },
       body: JSON.stringify([...messages, {role: 'user', content: promptMessage}]),
     }).then(async (res) => {
-      const reader = res.body.getReader()
+      const reader = res.body!.getReader()
       const decoder = new TextDecoder()
       let result = ''
   
@@ -123,7 +126,7 @@ export default function Home() {
     }
     setDialogMessage(data["message"])    
 
-    await delay(3000)
+    await sleep(3000)
     setErrorType('')
     setDialogOpen(false)
     setDialogMessage('')
@@ -257,7 +260,7 @@ export default function Home() {
         </Stack>    
       </Stack>
 
-      {dialogOpen && <Alert severity={errorType}>{dialogMessage}</Alert>}
+      {dialogOpen && <Alert severity={errorType == "success" ? "success" : errorType == "info" ? "info" : "error"}>{dialogMessage}</Alert>}
 
     </Box>
   )

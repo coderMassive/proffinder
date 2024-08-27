@@ -52,7 +52,12 @@ export async function POST(req) {
         })
     }
     // console.log(processed_data)
-    await index.upsert(processed_data);
+    try {
+        await index.upsert(processed_data);
+    }
+    catch (err) {
+        return new NextResponse(JSON.stringify({success: false, message: "Failed to get information on professor ID " + data}, {status: 500}));
+    }
     // console.log("Upserted " + processed_data.length + " items")
     return new NextResponse(JSON.stringify({success: true, message: "Upserted " + processed_data.length + " items"}, {status: 200}));
 }
