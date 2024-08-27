@@ -148,13 +148,13 @@ export default function Home() {
   const darkTheme = createTheme({
     palette: {
       primary: {
-        main: '#0052cc',
+        main: '#ffffff',
       },
       secondary: {
         main: '#edf2ff',
       },
       background: {
-        default: '#000000'
+        default: '#ffffff'
       }
     },
   });
