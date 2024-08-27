@@ -151,7 +151,6 @@ export default function Home() {
       flexDirection="column"
       justifyContent="center"
       alignItems="center"
-      color="#ffffff"
     >
       <Stack direction={'row'} spacing={2} mb={2}>
         <Stack
