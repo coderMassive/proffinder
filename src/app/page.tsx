@@ -155,11 +155,11 @@ export default function Home() {
       justifyContent="center"
       alignItems="center"
     >
-      <Stack direction={'row'} spacing={2} mb={2}>
+      <Stack direction={'column'} spacing={2} mb={2}>
         <Stack
           direction={'column'}
-          width="500px"
-          height="700px"
+          width="80vw"
+          height="40vh"
           border="1px solid black"
           p={2}
           spacing={3}
@@ -178,8 +178,10 @@ export default function Home() {
                "& input[type=number]": {
                                          MozAppearance: "textfield",
                                        },
+                "maxHeight": "5%"
                }}
               onChange={(e) => setProfessorID(e.target.value)}
+              
             />
             <Button variant="contained" onClick={addProfessor}>
               Add
@@ -192,7 +194,7 @@ export default function Home() {
               onChange={(e) => setFieldOfStudy(e.target.value)}
             />
 
-            <Stack direction={'row'} spacing={2}>
+            <Stack maxHeight="2%" direction={'row'} spacing={2}>
             <Typography variant="overline" display="block" gutterBottom>
               Review
             </Typography>
@@ -210,8 +212,8 @@ export default function Home() {
 
         <Stack
           direction={'column'}
-          width="500px"
-          height="700px"
+          width="80vw"
+          height="50vh"
           border="1px solid black"
           p={2}
           spacing={3}
